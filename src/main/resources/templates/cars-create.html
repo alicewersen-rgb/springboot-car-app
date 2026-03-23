@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Car</title>
+</head>
+<body>
+
+<!-- Binding to CreateCardto -->
+<!-- @thymesVar id="createCardto" type="com.example.carmanagementapp.DTO.CreateCarDTO" -->
+
+<h1>Create New Car</h1>
+
+<form th:action="@{/cars}" th:object="${createCarDTO}" method="post">
+
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" />
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    <br/>
+
+    <label>Brand:</label>
+    <input type="text" th:field="*{brand}" />
+    <span th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></span>
+    <br/>
+
+    <label>Horsepower:</label>
+    <input type="number" th:field="*{horsepower}" />
+    <span th:if="${#fields.hasErrors('horsepower')}" th:errors="*{horsepower}"></span>
+    <br/>
+
+    <label>Manufacture Date:</label>
+    <input type="date" th:field="*{manufactureDate}" />
+    <span th:if="${#fields.hasErrors('manufactureDate')}" th:errors="*{manufactureDate}"></span>
+    <br/>
+
+    <label>Description:</label>
+    <textarea th:field="*{description}"></textarea>
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    <br/>
+
+    <button type="submit">Create Car</button>
+</form>
+
+<br/>
+<a th:href="@{/cars}">Back to car list</a>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .create-btn {
+            padding: 8px 12px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* Flexbox för Actions-kolumnen */
+        .action-buttons {
+            display: flex;
+            gap: 5px; /* space between buttons */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Car List</h1>
+
+<a th:href="@{/cars/new}"><button class="create-btn">Create New Car</button></a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Horsepower</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.id}">1</td>
+        <td th:text="${car.name}">Car Name</td>
+        <td th:text="${car.brand}">Brand</td>
+        <td th:text="${car.horsepower}">100</td>
+        <td>
+            <div class="action-buttons">
+                <a th:href="@{/cars/edit/{id}(id=${car.id})}">
+                    <button class="edit-btn">Edit</button>
+                </a>
+                <a th:href="@{/cars/delete/{id}(id=${car.id})}"
+                   onclick="return confirm('Are you sure you want to delete this car?');">
+                    <button class="delete-btn">Delete</button>
+                </a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
